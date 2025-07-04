@@ -47,17 +47,18 @@ echo '{
   "user_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwibmFtZSI6IlJlZ3VsYXIgVXNlciIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjUxODg0ODAwfQ.9i8u7y6t5r4e3w2q1z0x9c8v7b6n5m"
 }' > /tmp/dvmcp_challenge10/config/tokens.json
 
-# Start all servers in the background
-python3 challenges/easy/challenge1/server_sse.py &
-python3 challenges/easy/challenge2/server_sse.py &
-python3 challenges/easy/challenge3/server_sse.py &
-python3 challenges/medium/challenge4/server_sse.py &
-python3 challenges/medium/challenge5/server_sse.py &
-python3 challenges/medium/challenge6/server_sse.py &
-python3 challenges/medium/challenge7/server_sse.py &
-python3 challenges/hard/challenge8/server_sse.py &
-python3 challenges/hard/challenge9/server_sse.py &
-python3 challenges/hard/challenge10/server_sse.py &
+# Activate virtual environment and start all servers in the background
+source venv/bin/activate
+venv/bin/python challenges/easy/challenge1/server_sse.py &
+venv/bin/python challenges/easy/challenge2/server_sse.py &
+venv/bin/python challenges/easy/challenge3/server_sse.py &
+venv/bin/python challenges/medium/challenge4/server_sse.py &
+venv/bin/python challenges/medium/challenge5/server_sse.py &
+venv/bin/python challenges/medium/challenge6/server_sse.py &
+venv/bin/python challenges/medium/challenge7/server_sse.py &
+venv/bin/python challenges/hard/challenge8/server_sse.py &
+venv/bin/python challenges/hard/challenge9/server_sse.py &
+venv/bin/python challenges/hard/challenge10/server_sse.py &
 
 echo "All servers started!"
 echo "Press Ctrl+C to stop all servers"
