@@ -3,6 +3,7 @@ from mcp.server.sse import SseServerTransport
 from starlette.applications import Starlette
 from starlette.routing import Mount, Route
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 # Create a vulnerable MCP server for Challenge 1: Basic Prompt Injection with SSE support
 class Challenge1Server:
@@ -11,6 +12,15 @@ class Challenge1Server:
         self.port = 9001  # Changed from 8001 to avoid conflicts
         self.mcp = FastMCP(self.name)
         self.app = FastAPI()
+        
+        # Add CORS middleware to allow browser connections
+        self.app.add_middleware(
+            CORSMiddleware,
+            allow_origins=["http://localhost:8080"],
+            allow_credentials=True,
+            allow_methods=["GET", "POST", "OPTIONS"],
+            allow_headers=["*"],
+        )
         
         # Add a resource with sensitive information
         @self.mcp.resource("internal://credentials")

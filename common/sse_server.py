@@ -3,6 +3,7 @@ from mcp.server.sse import SseServerTransport
 from starlette.applications import Starlette
 from starlette.routing import Mount, Route
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 # Create a base class for SSE-compatible MCP servers
 class SseCompatibleMcpServer:
@@ -10,6 +11,15 @@ class SseCompatibleMcpServer:
         self.mcp = FastMCP(name)
         self.port = port
         self.app = FastAPI()
+        
+        # Add CORS middleware to allow browser connections
+        self.app.add_middleware(
+            CORSMiddleware,
+            allow_origins=["http://localhost:8080"],
+            allow_credentials=True,
+            allow_methods=["GET", "POST", "OPTIONS"],
+            allow_headers=["*"],
+        )
         
     def mount_sse_server(self):
         """Mount the SSE server to the FastAPI app"""
